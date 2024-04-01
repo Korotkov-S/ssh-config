@@ -1,0 +1,15 @@
+[package]
+name = "ssh-config"
+version = "0.1.0"
+edition = "2021"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive"] }
+inquire = "0.7.4"
+ssh2-config = "0.2.3"
+
+[profile.release]
+lto = true
+opt-level = "s"
+panic = "abort"
