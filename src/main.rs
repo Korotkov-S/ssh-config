@@ -35,22 +35,29 @@ fn main() {
         .parse(&mut reader, ParseRule::STRICT)
         .expect("Failed to parse configuration");
 
-    dbg!(&config.get_hosts()[1].params.user);
-
     let hosts = config.get_hosts();
 
     let mut options: Vec<HostOption> = Vec::new();
 
     for host in hosts {
-        match &host.params.host_name {
-            Some(host_name) => {
-                let own_host = HostOption {
-                    config: host.clone(),
-                    value: host_name.clone(),
-                };
-                options.push(own_host);
-            }
-            None => println!("Host name not found"),
+        let params = host.params.clone();
+        let mut value = String::new();
+
+        let host_name = params.host_name.unwrap_or(String::from(""));
+
+        let pattern = host.pattern.clone();
+        let pattern_name = pattern[0].pattern.as_str();
+        value.push_str(pattern_name);
+        value.push_str(" - ");
+        value.push_str(host_name.as_str());
+
+        let own_host = HostOption {
+            config: host.clone(),
+            value: value.to_string(),
+        };
+
+        if !host_name.as_str().is_empty() {
+            options.push(own_host);
         }
     }
 
@@ -58,22 +65,18 @@ fn main() {
 
     match ssh_host {
         Ok(choice) => {
-            println!("ssh root@{}", choice.value);
-
             let mut host = String::from("");
             host.push_str(choice.config.params.user.expect("user not found").as_str());
             host.push_str("@");
             host.push_str(choice.value.as_str());
-
-            println!("ssh -- {}", host.as_str());
 
             Command::new("ssh")
                 .arg(host)
                 .spawn()
                 .unwrap()
                 .wait()
-                .expect("00");
+                .expect("error ssh connections");
         }
-        Err(_) => println!("There was an error, please try again"),
+        Err(_) => println!("Selected ssh host is not valid"),
     }
 }
