@@ -66,9 +66,10 @@ fn main() {
     match ssh_host {
         Ok(choice) => {
             let mut host = String::from("");
-            host.push_str(choice.config.params.user.expect("user not found").as_str());
-            host.push_str("@");
-            host.push_str(choice.value.as_str());
+
+            let pattern = choice.config.pattern.clone();
+            let pattern_name = pattern[0].pattern.as_str();
+            host.push_str(pattern_name);
 
             Command::new("ssh")
                 .arg(host)
