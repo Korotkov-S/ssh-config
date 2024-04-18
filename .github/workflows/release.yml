@@ -8,7 +8,7 @@ permissions:
 jobs:
   release:
     name: release ${{ matrix.target }}
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     strategy:
       fail-fast: false
       matrix:
