@@ -3,12 +3,37 @@ use inquire::Select;
 use ssh2_config::{Host, ParseRule, SshConfig};
 use std::fmt::{Display, Formatter, Result};
 use std::io;
+use std::path::PathBuf;
 use std::{fs::File, process::Command};
 
+mod path {
+    use dirs::home_dir;
+    use std::path::PathBuf;
+
+    pub fn get_default_path() -> String {
+        let home = home_dir();
+        let mut home_path = match home {
+            Some(home) => home,
+            None => PathBuf::new(),
+        };
+
+        home_path.push(".ssh/config");
+
+        let path_str = match home_path.to_str() {
+            Some(p) => String::from(p),
+            None => String::from(""),
+        };
+
+        return path_str;
+    }
+}
+
+/// The tool for working with a ssh config
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
-    #[arg(short, long)]
+    /// Path to ssh config file
+    #[arg(short, long, default_value_t = path::get_default_path())]
     path: String,
 }
 
@@ -28,8 +53,10 @@ fn main() {
 
     let config_path = args.path;
 
+    let path = PathBuf::from(config_path);
+
     let mut reader =
-        io::BufReader::new(File::open(config_path).expect("Could not open configuration file"));
+        io::BufReader::new(File::open(path).expect("Could not open configuration file"));
 
     let config = SshConfig::default()
         .parse(&mut reader, ParseRule::STRICT)
