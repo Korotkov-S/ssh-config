@@ -1,7 +1,7 @@
 # About
 
 The tool  render list of hostname from a ssh config file.
-By default tool read ssh config file by path `.ssh/config`. If config  has another path use -p key.
+By default tool read ssh config file by path `.ssh/config`. If config  has another path use option `-p`.
 
 ### Example
 
