@@ -1,13 +1,16 @@
-# The tool for working with ssh config file
+# About
 
-By default tool search ssh config file by `.ssh/config`.
+The tool  render list of hostname from a ssh config file.
+By default tool read ssh config file by path `.ssh/config`. If config  has another path use -p key.
 
-### examples
+### Example
 
+Show list of hostname from `.ssh/config` file
 ```bash
 ssh-config
 ```
 
+Show list of hostname from `./custom/path/to/config` file
 ```bash
 ssh-config -p './custom/path/to/config'
 ```
