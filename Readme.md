@@ -5,7 +5,9 @@ By default tool read ssh config file by path `.ssh/config`. If config  has anoth
 
 
 ####
-<video src='https://vimeo.com/1039097803' width=180 />
+https://github.com/user-attachments/assets/dbfd4e9f-57bf-4888-bf10-47c9e739ec4f
+
+
 
 ### Example
 
