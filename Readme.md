@@ -3,6 +3,10 @@
 The tool  render list of hostname from a ssh config file.
 By default tool read ssh config file by path `.ssh/config`. If config  has another path use option `-p`.
 
+
+####
+<video src='https://vimeo.com/1039097803' width=180>
+
 ### Example
 
 Show list of hostname from `.ssh/config` file
