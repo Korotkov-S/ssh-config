@@ -15,5 +15,5 @@ ssh-config -p './custom/path/to/config'
 ### TODO
 - [x] using default config file
 - [x] support a custom path to config file
-- [] save passwords
-- [] open config file in a text editor
+- [ ] save passwords
+- [ ] open config file in a text editor
