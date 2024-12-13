@@ -5,7 +5,7 @@ By default tool read ssh config file by path `.ssh/config`. If config  has anoth
 
 
 ####
-<video src='https://vimeo.com/1039097803' width=180>
+<video src='https://vimeo.com/1039097803' width=180 />
 
 ### Example
 
