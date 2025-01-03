@@ -64,12 +64,16 @@ pub fn get_password_path(path: PathBuf, host_name: &str) -> PathBuf {
 fn create_password_file(password_path: PathBuf) -> io::Result<File> {
     let _ = create_dir_all(password_path.parent().as_ref().unwrap());
 
-    let file = File::create_new(password_path.clone());
+    let file = File::create(password_path.clone());
 
     let path = password_path.to_str();
     match path {
         Some(p) => {
-            Command::new("chmod").arg("+x").arg(p).spawn().expect("msg");
+            Command::new("chmod")
+                .arg("+x")
+                .arg(p)
+                .output()
+                .expect("msg");
         }
         None => {
             println!("NONE!");
