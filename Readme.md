@@ -1,5 +1,9 @@
 # About
 
+
+<a href="https://github.com/Korotkov-S/ssh-config"><img src="https://github.com/user-attachments/assets/af6b14b6-0a5d-4cfe-b8b8-773407455fdb" height="150" width="150" ></a>
+
+
 The tool  render list of hostname from a ssh config file.
 By default tool read ssh config file by path `.ssh/config`. If config  has another path use option `-p`.
 Automate signin to a host by password. Can automate logic on server.
