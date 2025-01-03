@@ -6,28 +6,16 @@ pub fn get_default_path() -> String {
 
     home.push(".ssh/config");
 
-    let path_str = match home.to_str() {
-        Some(p) => String::from(p),
-        None => String::from(""),
-    };
-
-    return path_str;
+    return String::from(home.to_str().unwrap_or_default());
 }
 
 pub fn get_home_dir() -> PathBuf {
-    let home = home_dir();
-    return match home {
-        Some(home) => home,
-        None => PathBuf::new(),
-    };
+    return home_dir().unwrap_or_default();
 }
 
 pub fn get_ssh_config_path() -> PathBuf {
     let home = home_dir();
-    let mut home_path = match home {
-        Some(home) => home,
-        None => PathBuf::new(),
-    };
+    let mut home_path = home.unwrap_or_default();
 
     home_path.push(".ssh_config");
 

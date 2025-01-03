@@ -34,7 +34,7 @@ pub fn parse(config_path: String) -> Vec<HostOption> {
         let params = host.params.clone();
         let mut value = String::new();
 
-        let host_name = params.host_name.unwrap_or(String::from(""));
+        let host_name = params.host_name.unwrap_or_default();
 
         let pattern = host.pattern.clone();
         let pattern_name = pattern[0].pattern.as_str();

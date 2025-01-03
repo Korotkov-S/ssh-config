@@ -2,7 +2,7 @@ use std::process::Command;
 
 use crate::{password::get_password_path, path::get_ssh_config_path, ssh_config::HostOption};
 
-pub fn connect(host_option: HostOption) {
+pub fn connect(host_option: &HostOption) {
     let mut host = String::from("");
 
     let pattern = host_option.config.pattern.clone();
@@ -11,7 +11,7 @@ pub fn connect(host_option: HostOption) {
 
     let mut ssh = Command::new("ssh");
 
-    let password_path = get_password_path(get_ssh_config_path(), host_option.host_name);
+    let password_path = get_password_path(get_ssh_config_path(), host_option.host_name.as_str());
     if let Some(path) = password_path.to_str() {
         if password_path.exists() {
             ssh.env("SSH_ASKPASS", path)

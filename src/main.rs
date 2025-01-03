@@ -46,15 +46,15 @@ fn main() {
                 match password {
                     Commands::Password { actions } => match actions {
                         PasswordActions::Create => {
-                            password::new_password(choice);
+                            password::new_password(&choice);
                         }
                         PasswordActions::Delete => {
-                            password::remove_password(choice);
+                            password::remove_password(&choice);
                         }
                     },
                 }
             } else {
-                ssh::connect(choice);
+                ssh::connect(&choice);
             }
         }
         Err(_) => println!("Selected ssh host is not valid"),
