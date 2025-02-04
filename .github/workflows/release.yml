@@ -3,14 +3,14 @@ name: Rust Build and Release
 on:
   push:
     tags:
-      - "v*"
+      - "v*" # Trigger the workflow on tags like v1.0.0, v2.1.0, etc.
 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest] # Build for Linux and macOS
         include:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
@@ -56,7 +56,7 @@ jobs:
           tar -czvf release/<your-binary-name>-${{ matrix.artifact_name }}.tar.gz -C release <your-binary-name>-${{ matrix.artifact_name }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: <your-binary-name>-${{ matrix.artifact_name }}
           path: release/<your-binary-name>-${{ matrix.artifact_name }}.tar.gz
@@ -66,7 +66,7 @@ jobs:
     needs: build
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
 
