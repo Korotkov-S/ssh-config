@@ -20,24 +20,24 @@ https://github.com/user-attachments/assets/dbfd4e9f-57bf-4888-bf10-47c9e739ec4f
 brew install korotkov-s/ssh-config/ssh-config
 ```
 
-## Example
+## Usage
 
-Show list of hostname from `.ssh/config` file
+Show hosts in a `.ssh/config` file
 ```bash
 ssh-config
 ```
 
-Show list of hostname from `./custom/path/to/config` file
+Show hosts from a config file file by path
 ```bash
 ssh-config -p './custom/path/to/config'
 ```
 
-Create new password by host name
+Create new password
 ```bash
 ssh-config password create
 ```
 
-Delete a password by host name
+Delete a password
 ```bash
 ssh-config password delete
 ```
