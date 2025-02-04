@@ -1,9 +1,12 @@
 name: Rust Build and Release
 
+permissions:
+  contents: write
+
 on:
   push:
     tags:
-      - "v*" # Trigger the workflow on tags like v1.0.0, v2.1.0, etc.
+      - "v*"
 
 jobs:
   build:
