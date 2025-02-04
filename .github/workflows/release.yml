@@ -52,14 +52,14 @@ jobs:
       - name: Package the release
         run: |
           mkdir -p release
-          cp target/${{ matrix.target }}/release/<your-binary-name> release/<your-binary-name>-${{ matrix.artifact_name }}
-          tar -czvf release/<your-binary-name>-${{ matrix.artifact_name }}.tar.gz -C release <your-binary-name>-${{ matrix.artifact_name }}
+          cp target/${{ matrix.target }}/release/ssh-config release/ssh-config-${{ matrix.artifact_name }}
+          tar -czvf release/ssh-config-${{ matrix.artifact_name }}.tar.gz -C release ssh-config-${{ matrix.artifact_name }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: <your-binary-name>-${{ matrix.artifact_name }}
-          path: release/<your-binary-name>-${{ matrix.artifact_name }}.tar.gz
+          name: ssh-config-${{ matrix.artifact_name }}
+          path: release/ssh-config-${{ matrix.artifact_name }}.tar.gz
 
   create-release:
     runs-on: ubuntu-latest
