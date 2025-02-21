@@ -42,7 +42,7 @@ pub fn parse(config_path: String) -> Vec<HostOption> {
         value.push_str(" - ");
         value.push_str(host_name.as_str());
 
-        if !host_name.as_str().is_empty() {
+        if !host_name.is_empty() {
             let own_host = HostOption {
                 value: value.to_string(),
                 config: host.clone(),
