@@ -67,6 +67,12 @@ jobs:
       - name: List downloaded artifacts
         run: ls -l artifacts
 
+      - name: List downloaded artifacts
+        run: ls -l artifacts/binary-Linux
+
+      - name: List downloaded artifacts
+        run: ls -l artifacts/binary-macOS
+
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -84,7 +90,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/binary-ubuntu-latest/ssh-config-ubuntu-latest
+          asset_path: artifacts/binary-Linux/ssh-config-Linux
           asset_name: ssh-config-linux
           asset_content_type: application/octet-stream
 
@@ -94,18 +100,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/binary-macos-latest/ssh-config-macos-latest
+          asset_path: artifacts/binary-macOS/ssh-config-macOS
           asset_name: ssh-config-macos
           asset_content_type: application/octet-stream
-
-  cleanup:
-    runs-on: ubuntu-latest
-    if: failure()
-    needs: [build, create-release]
-    steps:
-      - name: Delete release
-        uses: actions/delete-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ needs.create-release.outputs.release_id }}
