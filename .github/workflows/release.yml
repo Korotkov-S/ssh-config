@@ -64,6 +64,9 @@ jobs:
         with:
           path: artifacts
 
+      - name: List downloaded artifacts
+        run: ls -l artifacts
+
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
