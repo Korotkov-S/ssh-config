@@ -97,3 +97,15 @@ jobs:
           asset_path: artifacts/binary-macos-latest/ssh-config-macos-latest
           asset_name: ssh-config-macos
           asset_content_type: application/octet-stream
+
+  cleanup:
+    runs-on: ubuntu-latest
+    if: failure()
+    needs: [build, create-release]
+    steps:
+      - name: Delete release
+        uses: actions/delete-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ needs.create-release.outputs.release_id }}
