@@ -94,5 +94,5 @@ jobs:
           for asset in artifacts/*; do
             asset_name=$(basename $asset)
             echo "Uploading $asset_name..."
-            gh release upload ${{ github.ref }} $asset --clobber
+            gh release upload ${{ github.ref_name }} $asset --clobber
           done
